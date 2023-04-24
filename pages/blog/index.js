@@ -178,7 +178,6 @@ export default function SalesForceDevelopment() {
                               className='h-full rounded-xl'
                               style={{ width: '100%' }}
                               src={post &&  post['_embedded'] &&  post['_embedded']['wp:featuredmedia'] &&  post['_embedded']['wp:featuredmedia'][0] ?
-                                post['_embedded']['wp:featuredmedia'][0]
                                    post['_embedded']['wp:featuredmedia'][0][
                                       'source_url'
                                     ]
