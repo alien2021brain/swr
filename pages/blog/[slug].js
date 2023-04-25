@@ -197,31 +197,10 @@ export default function SalesForceDevelopment({ data, datafull }) {
   );
 }
 
-export async function getStaticPaths() {
-  const res = await fetch(
-    `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed`,
-    {
-      headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        Pragma: 'no-cache',
-        Expires: 0,
-      },
-    }
-  );
-  const posts = await res.json();
-
-  const paths = posts.map((post) => ({
-    params: { slug: post.slug },
-  }));
-  return { paths, fallback: false };
-}
-
 export async function getServerSideProps({ params }) {
-  // const { slug } = context.params;
-  // console.log('here',context.params);
-  // Fetch data from external API
+  const { slug } = params;
   const res = await fetch(
-    `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed&slug=${params.slug}`
+    `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed&slug=${slug}`
   );
   const res1 = await fetch(
     `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed`
@@ -229,6 +208,6 @@ export async function getServerSideProps({ params }) {
   const data = await res.json();
   const datafull = await res1.json();
 
-  // Pass data to the page via props
   return { props: { data, datafull } };
 }
+
